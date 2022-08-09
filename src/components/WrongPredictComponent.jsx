@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ImageComponent from './ImageComponent'
 
+
+
+
 function WrongPredict (props) {
 
     const [predictions, setPredictions] = useState([]);
@@ -14,8 +17,27 @@ function WrongPredict (props) {
         })
     }, [])
 
-    const deletePredict = () => {
-        
+    const deletePredict = (id) => {
+        fetch(`/admin/wrongpredictdelete/${id}`, 
+        {method: 'DELETE', 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(
+        setPredictions(predictions.filter(prediction => prediction.id !== id))
+        );    
+    }
+
+    const changeStatus = (id) => {
+        fetch(`/admin/wrongpredictstatus/${id}`,
+        {method: 'PUT', 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+        }).then (res => res.json())
+        .then (data => setPredictions(data))
     }
 
     const predictlist = predictions.map(prediction => {
@@ -28,7 +50,12 @@ function WrongPredict (props) {
                     <ImageComponent image={prediction.photoString} /> 
                 </td>
                 <td>
-                    <button className='btn btn-danger' onClick={deletePredict(prediction.id)}>Drop</button>
+                    <span>{prediction.status > 0 ? "Approved" : "Pending"}</span>
+                </td>
+                <td>
+                    <button className='btn btn-danger' onClick={() => deletePredict(prediction.id)}>Drop</button>
+                    <button className='btn btn-primary' onClick ={() => changeStatus(prediction.id)}>Change Status</button>
+
                 </td>
             </tr>
         )
@@ -37,13 +64,15 @@ function WrongPredict (props) {
 
     return (
         <div className='container'>
-            <table className='table'>
+            <h1 className='display-4'>User Photo Submissions</h1>
+            <table className='table text-center mt-5'>
                 <thead>
                     <tr>
                         <th>Predicted</th>
                         <th>User's Input</th>
                         <th>Image</th>
-                        <th>Drop from Database</th>
+                        <th>Current Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
