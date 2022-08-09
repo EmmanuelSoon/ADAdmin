@@ -10,7 +10,7 @@ function Main () {
         <div>
             <Routes>
                     <Route path="/wrongpredict" element={<WrongPredict />}/>
-                    <Route path="*" element= {<Navigate to="/" replace />} /> 
+                    <Route path="*" element= {<Navigate to="/wrongpredict" replace />} /> 
                 
             </Routes>
         </div>
