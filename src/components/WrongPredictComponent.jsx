@@ -1,6 +1,5 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import ImageComponent from './ImageComponent'
 
 function WrongPredict (props) {
 
@@ -25,7 +24,8 @@ function WrongPredict (props) {
                 <td>{prediction.predictedIngredient}</td>
                 <td>{prediction.actualIngredient}</td>
                 <td>
-                    <img src={prediction.photoString} alt="not working.." height={250} width={250} />
+                    {/* <img src={prediction.photoString} alt="not working.." height={250} width={250} /> */}
+                    <ImageComponent image={prediction.photoString} /> 
                 </td>
                 <td>
                     <button className='btn btn-danger' onClick={deletePredict(prediction.id)}>Drop</button>
