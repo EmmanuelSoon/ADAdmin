@@ -73,7 +73,7 @@ function User () {
 
     return (
         <div className="container">
-            <h2 className="mb-5 mt-5">Current Users</h2>
+            <h2 className="display-4 mb-5 mt-5">Current Users</h2>
             <table className="table text-center">
                 <thead>
                     <tr>

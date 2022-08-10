@@ -64,7 +64,7 @@ function WrongPredict (props) {
 
     return (
         <div className='container'>
-            <h1 className='display-4'>User Photo Submissions</h1>
+            <h1 className='display-4 mt-5 mb-5'>User Photo Submissions</h1>
             <table className='table text-center mt-5'>
                 <thead>
                     <tr>

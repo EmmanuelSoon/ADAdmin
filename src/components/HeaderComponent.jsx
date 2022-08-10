@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Navbar,  Nav, Container} from 'react-bootstrap';
+import {Navbar,  Nav, Container, Offcanvas } from 'react-bootstrap';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 import logo from '../logo.jpg'
@@ -15,27 +15,36 @@ function Header(){
 
     return(
         <React.Fragment>
-                <Navbar variant = "light" expand="md" collapseOnSelect className='border-bottom'> 
+                <Navbar variant = "dark" bg="dark" expand={false} collapseOnSelect > 
                     <Container>
                         <Navbar.Brand>
-                            <NavLink className="nav-link" to={'/'}>
+                            <NavLink className="nav-link mt-1" to={'/'}>
                                 <img src={logo} height="40" width="41" className="rounded-circle"
                                     alt="blank" />
                                 &ensp; KeepFitWithHenry! (Admin)
                             </NavLink>
                             </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                        <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
-                                <NavLink className="nav-link" to={'/'}>Dashboard</NavLink>
-                                <NavLink className="nav-link" to={'/reports'}>User Reports</NavLink>
-                                <NavLink className="nav-link" to={'/wrongpredict'}>Photo Submissions</NavLink>
-                                <NavLink className="nav-link" to={'/users'}>User details</NavLink>
-                        </Nav>
-                        <Nav>
-                            <NavLink className="nav-link" to={'/'}>Logout</NavLink>
-                        </Nav>
-                        </Navbar.Collapse>
+                        <Navbar.Offcanvas id="responsive-navbar-nav">
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title className='lead fs-4 border-bottom border-dark mt-2'>
+                                <img src={logo} height="40" width="41" className="rounded-circle"
+                                        alt="blank" /> KeepFitWithHenry! (Admin)
+                            </Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body className='lead'>
+                            <Nav className="me-auto">
+                                    <NavLink className="nav-link" to={'/'}>Dashboard</NavLink>
+                                    <NavLink className="nav-link" to={'/reports'}>User Reports</NavLink>
+                                    <NavLink className="nav-link" to={'/wrongpredict'}>Photo Submissions</NavLink>
+                                    <NavLink className="nav-link" to={'/users'}>User details</NavLink>
+                            </Nav>
+                            <Nav>
+                                <NavLink className="nav-link" to={'/'}>Logout</NavLink>
+                            </Nav>
+                        </Offcanvas.Body>
+
+                        </Navbar.Offcanvas>
                     </Container>
 
                 </Navbar>
