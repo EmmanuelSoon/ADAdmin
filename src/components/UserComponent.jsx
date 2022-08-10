@@ -55,7 +55,7 @@ function User () {
         );    
     }
 
-    const userList = users.filter((item, i) => i < max && i >= min).map(user => {
+    const userList = users.filter((item, i) => i < max && i >= min && item.name !== "official-user").map(user => {
         return (
             <tr key={user.id}>
                 <td>{user.name}</td>

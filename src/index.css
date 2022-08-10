@@ -13,7 +13,7 @@ code {
 }
 
 .card-image{
-  width: 100%;
+  width: 250px;
   height: 220px;
   display: flex;
   justify-content: center;

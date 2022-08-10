@@ -23,13 +23,14 @@ function Header(){
                                     alt="blank" />
                                 &ensp; KeepFitWithHenry! (Admin)
                             </NavLink>
-                            </Navbar.Brand>
+                        </Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Offcanvas id="responsive-navbar-nav">
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title className='lead fs-4 border-bottom border-dark mt-2'>
-                                <img src={logo} height="40" width="41" className="rounded-circle"
-                                        alt="blank" /> KeepFitWithHenry! (Admin)
+                            <Offcanvas.Title className='lead fs-4 border-bottom border-dark mt-2' >
+                                <NavLink to ={'/'} style={{ textDecoration: 'none', color:'black' }}>
+                                <img src={logo} height="50" width="50" className="rounded-circle" alt="blank" /> KeepFitWithHenry! (Admin)
+                                </NavLink>
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body className='lead'>
