@@ -16,7 +16,8 @@ function Recipe(props){
         dateTime: '',
         ingredientList: [],
         procedures: [],
-        nutritionRecord: []
+        nutritionRecord: [],
+        flagged: false
     };
 
     const [recipe, setRecipe] = useState(emptyRecipe);
@@ -42,6 +43,7 @@ function Recipe(props){
     })
 
     const [user, setUser] = useState([])
+    const [flagged, setFlagged] = useState(false)
 
     useEffect(() => {
         fetch(`/recipe/${id}`)
@@ -108,6 +110,32 @@ function Recipe(props){
         )
     })
 
+    const handleUnflag = () => {
+        if(flagged === true){
+            setFlagged(false);
+            fetch(`/admin/recipechangeflag/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+    }
+
+    const handleflag = () => {
+        if (flagged === false){
+            setFlagged(true);
+            fetch(`/admin/recipechangeflag/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+        }
+    }
+
     const userDetails = () => {
         return (
             <table className='table mt-5'>
@@ -119,6 +147,16 @@ function Recipe(props){
                         <td>Created By: {user.name}</td>
                         <td>Joined: {user.dateCreated}</td>
                         <td>Gender: {user.gender}</td>
+                    </tr>
+                    <tr>
+                        <td>Flagged: {flagged.toString()}</td>
+                        <td></td>
+                        <td>
+                            <div>
+                                <button className='btn btn-success' onClick={() => handleUnflag()}><span className='fa fa-check-circle'></span></button>
+                                <button className='btn btn-danger'onClick={() => handleflag()}><span className='fa fa-flag'></span></button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
