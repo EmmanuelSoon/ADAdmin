@@ -35,7 +35,7 @@ function Home () {
                             <ul className="list-group list-group-flush col-8">
                                 <li className="list-group-item lead">Current number of Users: {data.userCount} </li>
                                 <li className="list-group-item lead">Current number of Recipes: {data.recipeCount} </li>
-                                <li className="list-group-item lead">other useful information?</li>
+                                <li className="list-group-item lead">Flagged Recipes: ...</li>
                             </ul>
                             <div className="col-4 float-end">
                                 <Link to={"/users"} >

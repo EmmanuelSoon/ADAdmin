@@ -4,14 +4,16 @@ import { NavLink, Link, useNavigate } from 'react-router-dom';
 
 import logo from '../logo.jpg'
 
-function handleLogOut(){
-    localStorage.clear();
-    window.location.reload(true);
-    //this.props.location.push("http://localhost:8080")
-}
+
 
 function Header(){
 
+
+    const handleLogOut = () => {
+        sessionStorage.clear();
+        window.location.reload(false);
+        //this.props.location.push("http://localhost:8080")
+    }
 
     return(
         <React.Fragment>
@@ -39,7 +41,7 @@ function Header(){
                                     <NavLink className="nav-link" to={'/users'}>User details</NavLink>
                             </Nav>
                             <Nav>
-                                <NavLink className="nav-link" to={'/'}>Logout</NavLink>
+                                <a className="nav-link" href="#" onClick={() => handleLogOut()}>Logout</a>
                             </Nav>
                         </Offcanvas.Body>
 

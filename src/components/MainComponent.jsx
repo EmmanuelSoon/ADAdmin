@@ -19,6 +19,7 @@ function Main () {
                     <Route path="/users" element={<User />}/>
                     <Route path="/recipe/:id" exact={true} element={ <Recipe /> } />
 
+
                     <Route path="*" element= {<Navigate to="/" replace />} /> 
             </Routes>                
         </div>
