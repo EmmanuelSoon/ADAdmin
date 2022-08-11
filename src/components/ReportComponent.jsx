@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ToDoModal from "./ToDoModal";
 
 function Report () {
@@ -9,7 +9,6 @@ function Report () {
     const [reports, setReports] = useState([]);
     const[showToDoList, setShowToDoList] = useState(false);
     const[currentReport, setCurrentReport] = useState({id:0, actionsTaken:[]});
-    let {id} = useParams();
 
 
     
@@ -36,6 +35,18 @@ function Report () {
         setCurrentReport(report)
     }
 
+    const handleDelete = (id) => {
+        fetch(`/admin/report/${id}`,
+        {method: 'DELETE', 
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        }).then(
+            setReports(reports.filter(report => report.id !== id))
+        )        
+    }
+
 
     const reportList = reports.map(report => {
         return (
@@ -56,7 +67,7 @@ function Report () {
                             actions Available
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            <li><button className="dropdown-item">Delete</button></li>
+                            <li><button className="dropdown-item" onClick={() => handleDelete(report.id)}>Delete</button></li>
                             <li><button className="dropdown-item" onClick={() => handleActions(report)}>More Details</button></li>
                         </ul>
                     </div>
