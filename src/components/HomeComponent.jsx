@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import useToken from "./useToken";
 
-import logo from '../logo.jpg'
+import sadpig from '../sad_pig.png';
+import chefpig from '../pig_chef.jpg';
+import laptoppig from '../pig_laptop.jpg';
+
 
 function Home () {
 
@@ -15,10 +19,16 @@ function Home () {
         })
     },[])
 
+    const getToken = () => {
+        const tokenString = sessionStorage.getItem('token');
+        const userToken = JSON.parse(tokenString);
+        return userToken?.token
+      };
+
     return (
         <div className="container">
             <div className="mt-4 p-4 bg-light rounded">
-                <h1 className="display-4 mb-5">Hello, (add in the username here)</h1>
+                <h1 className="display-4 mb-5">Hello, {getToken()}</h1>
                 <p className="lead fs-4">Welcome to the admin website for GetFitWithHenry</p>
                 <hr className="my-4"></hr>
             </div>
@@ -27,7 +37,7 @@ function Home () {
                 <div className="row"> 
                     <div className="col-md-4">
                         <div className="card-image border-end">
-                            <img src={logo} alt="blank" />  
+                            <img src={chefpig} alt="blank" />  
                         </div>
                     </div>
                     <div className="col-md-8">
@@ -52,7 +62,7 @@ function Home () {
                 <div className="row"> 
                     <div className="col-md-4">
                         <div className="card-image border-end">
-                            <img src={logo} alt="blank" />  
+                            <img src={laptoppig} alt="blank" />  
                         </div>
                     </div>
                     <div className="col-md-8">
@@ -76,7 +86,7 @@ function Home () {
                 <div className="row"> 
                     <div className="col-md-4">
                         <div className="card-image border-end">
-                            <img src={logo}  alt="blank" />  
+                            <img src={sadpig}  alt="blank" />  
                         </div>
                     </div>
                     <div className="col-md-8">
@@ -84,7 +94,7 @@ function Home () {
                             <ul className="list-group  list-group-flush col-8">
                                 <li className="list-group-item lead">Total number of reports: {data.reportCount}</li>
                                 <li className="list-group-item lead">Pending Reports: {data.pendingReport} </li>
-                                <li className="list-group-item lead">Other info? </li>
+                                <li className="list-group-item lead">&ensp;</li>
 
                             </ul>
                             <div className="col-4 float-end">
