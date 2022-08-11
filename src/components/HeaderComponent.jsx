@@ -17,14 +17,12 @@ function Header(){
         <React.Fragment>
                 <Navbar variant = "dark" bg="dark" expand={false} collapseOnSelect > 
                     <Container>
+                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Brand>
                             <NavLink className="nav-link mt-1" to={'/'}>
-                                <img src={logo} height="40" width="41" className="rounded-circle"
-                                    alt="blank" />
-                                &ensp; KeepFitWithHenry! (Admin)
+                                KeepFitWithHenry! (Admin) &ensp; <img src={logo} height="40" width="41" className="rounded-circle" alt="blank" />
                             </NavLink>
                         </Navbar.Brand>
-                        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                         <Navbar.Offcanvas id="responsive-navbar-nav">
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title className='lead fs-4 border-bottom border-dark mt-2' >
