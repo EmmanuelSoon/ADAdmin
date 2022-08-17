@@ -52,6 +52,7 @@ function Recipe(props){
             console.log(data)
             setRecipe(data)
             setUser(data.user)
+            setFlagged(data.flagged)
         })
     }, [])
 

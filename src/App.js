@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import Main from './Components/MainComponent';
+import Main from './components/MainComponent';
 import './App.css';
 
-import useToken from './Components/useToken';
-import Login from './Components/LoginComponent';
+import useToken from './components/useToken';
+import Login from './components/LoginComponent';
 
 function App() {
 
