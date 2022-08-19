@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {Navbar,  Nav, Container, Offcanvas } from 'react-bootstrap';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 
-import logo from '../logo.jpg'
+import logo from '../logo.png'
 
 
 

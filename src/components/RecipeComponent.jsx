@@ -154,8 +154,10 @@ function Recipe(props){
                         <td></td>
                         <td>
                             <div>
-                                <button className='btn btn-success' onClick={() => handleUnflag()}><span className='fa fa-check-circle'></span></button>
-                                <button className='btn btn-danger'onClick={() => handleflag()}><span className='fa fa-flag'></span></button>
+                                {
+                                    flagged === true ? <button className='btn btn-success' onClick={() => handleUnflag()}><span className='fa fa-check-circle'></span> Unflag Recipe</button> :
+                                                        <button className='btn btn-danger'onClick={() => handleflag()}><span className='fa fa-flag'></span> Flag Recipe</button>
+                                }
                             </div>
                         </td>
                     </tr>
