@@ -8,6 +8,7 @@ function WrongPredict (props) {
 
     const [predictions, setPredictions] = useState([]);
     const [currentfilter, setCurrentFilter] = useState(0);
+    const [all, setAll] = useState(true);
 
     useEffect(() => {
         fetch('/admin/wrongpredictlist')
@@ -43,38 +44,75 @@ function WrongPredict (props) {
 
     const handleApprovedFilter = () => {
         setCurrentFilter(1);
+        setAll(false);
     }
     
     const handlePendingFilter = () => {
         setCurrentFilter(0);
+        setAll(false);
     }
 
-    const predictlist = predictions.filter(p => p.status === currentfilter).map(prediction => {
-        return (
-            <tr key={prediction.id}>
-                <td>{prediction.predictedIngredient}</td>
-                <td>{prediction.actualIngredient}</td>
-                <td>
-                    {/* <img src={prediction.photoString} alt="not working.." height={250} width={250} /> */}
-                    <ImageComponent image={prediction.photoString} /> 
-                </td>
-                <td>
-                    <span>{prediction.status > 0 ? "Approved" : "Pending"}</span>
-                </td>
-                <td>
-                    <button className='btn btn-danger' onClick={() => deletePredict(prediction.id)}>Drop</button>
-                    <button className='btn btn-primary' onClick ={() => changeStatus(prediction.id)}>Change Status</button>
+    const handleAllFilter = () => {
+        setAll(true);
+    }
 
-                </td>
-            </tr>
-        )
-    })
+    const predictlist = () =>{
+        if(all){
+            return (
+                predictions.map(prediction => {
+                    return (
+                        <tr key={prediction.id}>
+                            <td>{prediction.predictedIngredient}</td>
+                            <td>{prediction.actualIngredient}</td>
+                            <td>
+                                {/* <img src={prediction.photoString} alt="not working.." height={250} width={250} /> */}
+                                <ImageComponent image={prediction.photoString} /> 
+                            </td>
+                            <td>
+                                <span>{prediction.status > 0 ? "Approved" : "Pending"}</span>
+                            </td>
+                            <td>
+                                <button className='btn btn-danger' onClick={() => deletePredict(prediction.id)}>Drop</button>
+                                <button className='btn btn-primary' onClick ={() => changeStatus(prediction.id)}>Change Status</button>
+            
+                            </td>
+                        </tr>
+                    )
+                })
+            )
+        }
+        else {
+            return (
+                predictions.filter(p => p.status === currentfilter).map(prediction => {
+                    return (
+                        <tr key={prediction.id}>
+                            <td>{prediction.predictedIngredient}</td>
+                            <td>{prediction.actualIngredient}</td>
+                            <td>
+                                {/* <img src={prediction.photoString} alt="not working.." height={250} width={250} /> */}
+                                <ImageComponent image={prediction.photoString} /> 
+                            </td>
+                            <td>
+                                <span>{prediction.status > 0 ? "Approved" : "Pending"}</span>
+                            </td>
+                            <td>
+                                <button className='btn btn-danger' onClick={() => deletePredict(prediction.id)}>Drop</button>
+                                <button className='btn btn-primary' onClick ={() => changeStatus(prediction.id)}>Change Status</button>
+            
+                            </td>
+                        </tr>
+                    )
+                })
+            )
+        }
+    } 
 
 
     return (
         <div className='container'>
             <h1 className='display-4 mt-5 mb-3'>User Photo Submissions</h1>
             <div className="btn-group btn-group-sm" role="group">
+                <button type="button" class="btn btn-outline-dark" onClick={()=> handleAllFilter()}>SHOW ALL</button>
                 <button type="button" class="btn btn-outline-dark" onClick={()=> handlePendingFilter()}>PENDING</button>
                 <button type="button" class="btn btn-outline-dark" onClick={()=> handleApprovedFilter()}>APPROVED</button>
             </div>
@@ -89,7 +127,7 @@ function WrongPredict (props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {predictlist}
+                    {predictlist()}
                 </tbody>
             </table>
         </div>
