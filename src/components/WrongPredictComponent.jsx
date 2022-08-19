@@ -7,6 +7,7 @@ import ImageComponent from './ImageComponent'
 function WrongPredict (props) {
 
     const [predictions, setPredictions] = useState([]);
+    const [currentfilter, setCurrentFilter] = useState(0);
 
     useEffect(() => {
         fetch('/admin/wrongpredictlist')
@@ -40,7 +41,15 @@ function WrongPredict (props) {
         .then (data => setPredictions(data))
     }
 
-    const predictlist = predictions.map(prediction => {
+    const handleApprovedFilter = () => {
+        setCurrentFilter(1);
+    }
+    
+    const handlePendingFilter = () => {
+        setCurrentFilter(0);
+    }
+
+    const predictlist = predictions.filter(p => p.status === currentfilter).map(prediction => {
         return (
             <tr key={prediction.id}>
                 <td>{prediction.predictedIngredient}</td>
@@ -64,8 +73,12 @@ function WrongPredict (props) {
 
     return (
         <div className='container'>
-            <h1 className='display-4 mt-5 mb-5'>User Photo Submissions</h1>
-            <table className='table text-center mt-5'>
+            <h1 className='display-4 mt-5 mb-3'>User Photo Submissions</h1>
+            <div className="btn-group btn-group-sm" role="group">
+                <button type="button" class="btn btn-outline-dark" onClick={()=> handlePendingFilter()}>PENDING</button>
+                <button type="button" class="btn btn-outline-dark" onClick={()=> handleApprovedFilter()}>APPROVED</button>
+            </div>
+            <table className='table text-center mt-3'>
                 <thead>
                     <tr>
                         <th>Predicted</th>

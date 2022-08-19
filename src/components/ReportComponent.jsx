@@ -9,7 +9,7 @@ function Report () {
     const [reports, setReports] = useState([]);
     const[showToDoList, setShowToDoList] = useState(false);
     const[currentReport, setCurrentReport] = useState({id:0, actionsTaken:[]});
-
+    const [currentfilter, setCurrentFilter] = useState("SUBMITTED")
 
     
     // useEffect(() => {
@@ -47,8 +47,19 @@ function Report () {
         )        
     }
 
+    const handleSubmitFilter = () =>{
+        setCurrentFilter("SUBMITTED");
+    }
+    
+    const handleRespondedFilter = () =>{
+        setCurrentFilter("RESPONDED");
+    }
 
-    const reportList = reports.map(report => {
+    const handleCompletedFilter = () =>{
+        setCurrentFilter("COMPLETED");
+    }
+
+    const reportList = reports.filter(r => r.status === currentfilter).map(report => {
         return (
             <tr key={report.id}>
                 <td>{new Date(report.dateTime + "+0000").toUTCString()}</td>
@@ -78,8 +89,14 @@ function Report () {
 
     return (
         <div className="container">
-            <h2 className="display-4 mb-5 mt-5">Reports</h2>
+            <h2 className="display-4 mb-3 mt-5">Reports</h2>
             <ToDoModal show={showToDoList} setShow={setShowToDoList} report={currentReport} setReport = {setCurrentReport}/>
+            <div className="btn-group btn-group-sm mb-3" role="group">
+                <button type="button" class="btn btn-outline-dark" onClick={()=> handleSubmitFilter()}>USER SUBMITTED</button>
+                <button type="button" class="btn btn-outline-dark" onClick={()=> handleRespondedFilter()}>PENDING ACTIONS</button>
+                <button type="button" class="btn btn-outline-dark" onClick={()=> handleCompletedFilter()}>COMPLETED</button>
+            </div>
+
             <table className="table text-center">
                 <thead>
                     <tr>
